@@ -1,0 +1,15 @@
+<!-- here atfirst we are using the base.html template -->
+<!-- Im using the block which i created in base.html to display the title of the page -->
+<!-- Basically, block is the area where we can override the contents of template,
+    which you are extending in this current file i.e base.html -->
+<!-- Here another block is also created before ending the block you can add your content
+that need to be displayed specific to this file irrespective of base.html -->
+{% extends "base.html" %} {% block title %} Home{% endblock %}{% block content %}
+<h1> content </h1>
+<h1> This is Home Page </h1>
+{% endblock %}
+
+
+
+
+
