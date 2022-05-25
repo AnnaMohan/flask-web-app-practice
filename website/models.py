@@ -4,7 +4,7 @@ from enum import unique
 from time import timezone
 from unicodedata import category
 from importlib_metadata import email
-from . import db # here '.' represent the current package if incase we need to use this
+from . import db ## here '.' represent the current package if incase we need to use this
 # db object in anothe packer that line will be as from website import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
@@ -26,3 +26,5 @@ class User(db.Model,UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
+
+print(User.email)
