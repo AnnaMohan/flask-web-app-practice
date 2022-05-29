@@ -4,10 +4,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
+
 # Initialising the Databse
 db = SQLAlchemy()
 # Naming the database 
 DB_NAME = 'database.db'
+
+''' __name__ just represents the name of the file /name of the file that was ran.
+app.config[‘SECRET_KEY’] = ‘TYPE SOME RANDOM STRING HERE’  THIS LINE, Encrypt cookies and session data
+'''
 
 def create_app():
     app = Flask(__name__)
@@ -34,15 +39,15 @@ def create_app():
 
     login_manager = LoginManager()
 
-    # where do we the users go, if users are not logged in for that login_manager.login_view = 'auth.login
+    # where do we the users go, if users are not logged in for that, login_manager.login_view = 'auth.login
     login_manager.login_view= 'auth.login'
     
     # telling the login_manager which app we are using
     login_manager.init_app(app)
 
 
-    @login_manager.user_loader # the decorator is saying use the function to load the user 
-    def load_user(id):
+    @login_manager.user_loader # the decorator is saying use this below function to load the user 
+    def load_user(id): # this function is saying flask how we load a user.
         return User.query.get(int(id)) 
 
     return app
