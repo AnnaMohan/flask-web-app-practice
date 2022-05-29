@@ -12,13 +12,20 @@ from sqlalchemy.sql import func
 # inheriting Model class from database
 class Note(db.Model):
     # Column is a class
+    # id,data,date,user_id are the objects that we are creating for Column class
+    
     id = db.Column(db.Integer, primary_key = True)
     data = db.Column(db.String(10000))
+    # Func will automatically add date,time for us when we add a new note.
     date = db.Column(db.DateTime(timezone=True),default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     # in SqlAlchemy for foreign key we need to give the class name
     # lower case here we have given User class name as user.id to get
     # the id of the user to identify who is creating the notes.
+    '''A FOREIGN KEY is a field (or collection of fields) in one table,
+       that refers to the PRIMARY KEY in another table. The table with the foreign key
+       is called the child table, and the table with the primary key is called the 
+       referenced or parent table.'''
 
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key = True)

@@ -29,13 +29,15 @@ def login():
             # whihc is made while signing up will be matched if matched print successfull
             if check_password_hash(user.password, password):
                 flash('Logged in successfully',category='sucess')
+                # we are saying flask, to remember that,this(who has logged in) user is logged in
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.',category='error')
         else:
             flash('Email does not exits',category='error')
-    return render_template("login.html", text = 'Testing the value,varible passing using Jinja template', boolean = True)
+            # user = current_user will have all the info regarding the currently logged in user
+    return render_template("login.html", user=current_user, text = 'Testing the value,varible passing using Jinja template' )
 
 @auth.route('/logout')
 @login_required # using this @login_required decorator,just to make sure logging out the logged in user # even with out this it works
@@ -78,4 +80,4 @@ def signup():
             #change it here as well so reocmmended way is to call the homepage function in this way.
     
 
-    return render_template("sign_up.html")
+    return render_template("sign_up.html",user=current_user)
